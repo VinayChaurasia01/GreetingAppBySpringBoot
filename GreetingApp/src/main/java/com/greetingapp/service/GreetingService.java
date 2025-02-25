@@ -3,7 +3,9 @@ package com.greetingapp.service;
 import com.greetingapp.model.Greeting;
 import com.greetingapp.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,5 +46,19 @@ public class GreetingService {
 
     public List<Greeting> getAllGreetings() {
         return greetingRepository.findAll();
+    }
+
+
+    //UC-07Ability for the Greeting App to Edit a Greeting Messages in thE Repository
+    public Greeting updateGreeting(Long id, String newMessage) {
+        Optional<Greeting> existingGreeting = greetingRepository.findById(id);
+
+        if (existingGreeting.isPresent()) {
+            Greeting greeting = existingGreeting.get();
+            greeting.setMessage(newMessage);
+            return greetingRepository.save(greeting);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting not found with id: " + id);
+        }
     }
 }
