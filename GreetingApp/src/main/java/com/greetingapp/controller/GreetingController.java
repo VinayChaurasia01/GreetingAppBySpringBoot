@@ -43,4 +43,20 @@ public class GreetingController {
     public Greeting getGreetings() {
         return new Greeting(greetingService.getGreetingMessage());
     }
+    //http://localhost:8080/api/greetservice
+
+
+
+    //UC3
+
+    // GET Request - Returns a greeting message with optional name inputs
+    /*@GetMapping("/greetinput")
+    public Greeting getGreeting(@RequestParam(required = false) String firstname,
+                                @RequestParam(required = false) String lastname) {
+        return new Greeting(greetingService.getGreetingMessage(firstname, lastname));
+    }*/
+    //http://localhost:8080/api/greetinput?firstname=Vidhi&lastname=Jain
+
+    //UC4
+
 }
