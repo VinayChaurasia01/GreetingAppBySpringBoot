@@ -4,6 +4,7 @@ import com.example.GreetingApp.User;
 import com.greetingapp.model.Greeting;
 import com.greetingapp.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -85,5 +86,14 @@ public class GreetingController {
             @PathVariable Long id,
             @RequestParam String message) {
         return greetingService.updateGreeting(id, message);
+    }
+
+    //UC-08 Add Delete Endpoint in GreetingController.java
+    /*Uses @DeleteMapping to handle HTTP DELETE requests.
+Returns a success message when deletion is complete.*/
+    @DeleteMapping("/deletegreeting/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+        return ResponseEntity.ok("Greeting with ID " + id + " deleted successfully.");
     }
 }
