@@ -20,7 +20,6 @@ public class Greeting {
     public void setMessage(String message) {
         this.message = message;
     }*/
-
     private Long id;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
