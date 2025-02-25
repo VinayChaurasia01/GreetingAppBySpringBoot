@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/greetings")
 public class GreetingController {
     //UC1
-    @GetMapping("/greet")
+    /*@GetMapping("/greet")
     public Greeting getGreeting() {
         return new Greeting("Hello from BridgeLabz");
     }
@@ -28,7 +28,7 @@ public class GreetingController {
     @DeleteMapping("/greet")
     public Greeting deleteGreeting() {
         return new Greeting("Greeting deleted");
-    }
+    }*/
 
 
     //UC2
@@ -39,10 +39,10 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
-    @GetMapping("/greetservice")
+    /*@GetMapping("/greetservice")
     public Greeting getGreetings() {
         return new Greeting(greetingService.getGreetingMessage());
-    }
+    }*/
     //http://localhost:8080/api/greetservice
 
 
@@ -58,5 +58,10 @@ public class GreetingController {
     //http://localhost:8080/api/greetinput?firstname=Vidhi&lastname=Jain
 
     //UC4
-
+    @PostMapping("/savegreeting")
+    public Greeting saveGreeting(@RequestParam(required = false) String firstName,
+                                 @RequestParam(required = false) String lastName) {
+        String message = greetingService.getGreetingMessage(firstName, lastName);
+        return new Greeting(message);
+    }
 }
